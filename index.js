@@ -15,7 +15,13 @@ const Api = require('./src/api')
 const boostrap = async (api, secret_name, secret_value) => {
 
   try {
-    const newValue = Core.getInput('evaluate_value') ? eval(secret_value) : secret_value
+    let newValue = secret_value
+    if (Core.getInput('evaluate_value')) {
+      newValue = eval(secret_value)
+      if (typeof newValue === 'number') {
+        newValue = newValue.toString()
+      }
+    }
 
     const {key_id, key} = await api.getPublicKey()
 
