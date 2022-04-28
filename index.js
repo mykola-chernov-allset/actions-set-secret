@@ -15,9 +15,11 @@ const Api = require('./src/api')
 const boostrap = async (api, secret_name, secret_value) => {
 
   try {
+    const newValue = Core.getInput('evaluate_value') ? eval(secret_value) : secret_value
+
     const {key_id, key} = await api.getPublicKey()
 
-    const data = await api.createSecret(key_id, key, secret_name, secret_value)
+    const data = await api.createSecret(key_id, key, secret_name, newValue)
 
     if (api.isOrg()) {
       data.visibility = Core.getInput('visibility')

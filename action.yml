@@ -37,6 +37,12 @@ inputs:
   selected_repository_ids:
     description: Array of repository ids in case you set visibility as selected
     required: false
+  
+  evaluate_value:
+    description: Should the value be evaluated before assignment
+    default: false
+    required: false
+
 
 outputs:
   code:
